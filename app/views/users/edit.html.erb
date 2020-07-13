@@ -1,0 +1,37 @@
+<div class="container">
+    <div class='body'>
+        <% if @user.errors.any? %>
+             <div id="error_explanation">
+              <h4><%= pluralize(@user.errors.count, "error") %> prohibited this book from being saved:</h4>
+                    <ul>
+                      <% @user.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+        <% end %>
+
+        <div class='container'>
+            <h2>User info</h2>
+                <%= form_for @user do |f| %>
+                    <div class="field">
+                        <h4>Name</h4>
+                        <%= f.text_field :name %>
+                    </div>
+                    <div class="field">
+                        <h4>Image</h4>
+                        <%= f.attachment_field :profile_image %>
+                    </div>
+                    <div class="field">
+                        <h4>Introduction</h4>
+                        <%= f.text_area :introduction %>
+                    </div>
+
+                    <div class="actions">
+                    <%= f.submit 'Update User' %>
+                    </div>
+                <% end %>
+        </div>
+
+    </div>
+</div>
