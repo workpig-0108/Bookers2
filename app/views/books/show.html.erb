@@ -1,7 +1,7 @@
 <div class='container'>
     <div class='row'>
       <div class='col-xs-3'>
-        <%= render 'users/intro', user: @user, book: @books %>
+        <%= render 'users/intro', user: @user_show, book: @books %>
       </div>
           <div class='col-xs-9'>
                     <h2>Book detail</h2>
@@ -16,14 +16,14 @@
 
                             <tr>
                                 <td>
-                                    <%= attachment_image_tag @user, :profile_image, :fill, 60, 60,class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
-                                    <%= link_to @user_show.name, user_path(current_user) %>
+                                    <%= attachment_image_tag @user_show, :profile_image, :fill, 60, 60,class: "img-circle pull-left profile-thumb", fallback: "no_image.jpg"%>
+                                    <%= link_to @user_show.name, user_path(@user_show) %>
                                 </td>
                                 <td><%= @book.title %></td>
                                 <td><%= @book.body %></td>
                                 <% if current_user == @user_show %>
-                                  <td><%= link_to "Edit", edit_book_path(@book) %></td>
-                                  <td><%= link_to "Destroy", book_path(@book), method: :delete, data: { confirm: '本当に消しますか？' } %></td>
+                                  <td><%= link_to "Edit", edit_book_path(@book), class: "btn btn-success btn-xs" %></td>
+                                  <td><%= link_to "Destroy", book_path(@book), class: "btn btn-danger btn-xs", method: :delete, data: { confirm: '本当に消しますか？' } %></td>
                                 <% end %>
                             </tr>
                         </table>

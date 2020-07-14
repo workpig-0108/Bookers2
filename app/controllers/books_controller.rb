@@ -15,10 +15,6 @@ before_action :ensure_current_user, {only: [:edit, :update, :destroy]}
     @user_show = @book.user
   end
 
-  def new
-    @book = Book.new
-  end
-
   def create
         @book = Book.new(book_params)
         @book.user_id = current_user.id
