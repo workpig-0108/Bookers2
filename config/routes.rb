@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
+  get 'favorites/create'
   devise_for :users
-  resources :books
   resources :users
+  resources :books do
+  	resources :post_comments,only: [:create, :destroy]
+  end
+  resource :favorites, only: [:create, :destroy]
   root 'homes#top'
   get 'home/about' => 'homes#about'
   post 'books' => 'books#create'

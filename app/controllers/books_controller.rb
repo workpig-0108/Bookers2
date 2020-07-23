@@ -3,7 +3,7 @@ before_action :authenticate_user!
 before_action :ensure_current_user, {only: [:edit, :update, :destroy]}
 
   def index
-    @books = Book.all
+    @books = Book.page(params[:page]).reverse_order
     @user = current_user
     @book = Book.new
   end
@@ -11,16 +11,17 @@ before_action :ensure_current_user, {only: [:edit, :update, :destroy]}
   def show
     @books = Book.new
     @book = Book.find(params[:id])
+    @post_comment = PostComment.new
     @user = current_user
     @user_show = @book.user
   end
 
   def create
-        @book = Book.new(book_params)
-        @book.user_id = current_user.id
-    if  @book.save
-        flash[:notice] ="You have creatad book successfully."
-        redirect_to book_path(@book)
+       @book = Book.new(book_params)
+       @book.user_id = current_user.id
+    if @book.save
+       flash[:notice] ="You have creatad book successfully."
+       redirect_to book_path(@book)
     else
         @books = Book.all
         @user = current_user
