@@ -32,6 +32,23 @@
 					     <th>introduction</th>
 					     <td><%= user.introduction %></td>
 					    </tr>
+
+					     <tr>
+					     <th>followings</th>
+						     <td>
+						     	<strong id="following" class="stat">
+	                                <%= user.following_user.count %>
+	                              </strong>
+	                          </td>
+					    </tr>
+
+					    <tr>
+					     <th>followers</th>
+						     <td><strong id="followers" class="stat">
+	                                <%= user.follower_user.count %>
+	                              </strong>
+	                          </td>
+					    </tr>
 					</tbody>
 					<br>
 				</table>
@@ -39,6 +56,19 @@
 						<tr>
 							<th style="border:none;">
 								<%= link_to '',edit_user_path(user), class:"glyphicon glyphicon-wrench btn btn-default col-xs-12" %>
+							</th>
+						</tr>
+						<tr>
+							<th style="border:none;">
+							<% unless current_user?(user) %>
+                    			<div id="follow_form">
+                    			<% if current_user.following?(user) %>
+                      				<%= link_to "フォローを外す", unfollow_path(user), method: :post, class: "btn btn-primary" %>
+                    			<% else %>
+                      				<%= link_to "フォローする", follow_path(user), method: :post, class: "btn btn-primary" %>
+                    			<% end %>
+                    			</div>
+                  			<% end %>
 							</th>
 						</tr>
 					</div>
